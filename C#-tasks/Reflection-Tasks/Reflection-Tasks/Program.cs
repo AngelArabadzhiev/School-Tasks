@@ -16,7 +16,7 @@ class Program
         Console.WriteLine(res);
 
         Console.WriteLine("--------------------Third task--------------------");
-        res = spy.GetGettersAndSetters("Reflection_Tasks.Hacker");
+        res = spy.RevealPrivateMethods("Reflection_Tasks.Hacker");
         Console.WriteLine(res);
     }
 }
