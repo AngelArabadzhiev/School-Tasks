@@ -149,4 +149,28 @@ public class Spy
 
         return BeautifulFields(finalFields);
     }
+
+    public void StealPeshoslavsData()
+    {
+        
+        Type blackBoxType = typeof(Reflection_Tasks.BlackBoxInt);
+        object blackBoxInstance = Activator.CreateInstance(blackBoxType, true);
+
+        FieldInfo innerValueField = blackBoxType.GetField("value", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        string input;
+        while ((input = Console.ReadLine()).ToLower() != "end")
+        {
+            string[] parts = input.Split('_');
+            string methodName = parts[0];
+            int value = int.Parse(parts[1]);
+
+            MethodInfo method = blackBoxType.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic);
+            method.Invoke(blackBoxInstance, new object[] { value });
+
+            int currentValue = (int)innerValueField.GetValue(blackBoxInstance);
+            Console.WriteLine($"Currenct value {currentValue}");
+            
+        }
+    }
 }
